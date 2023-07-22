@@ -50,7 +50,7 @@ export default class GoogleOAuth2 {
     })}`;
   }
 
-  protected async getTokens(code: string): Promise<Tokens> {
+  public async getTokens(code: string): Promise<Tokens> {
     const payload = new URLSearchParams({
       code,
       client_id: this.appID,
