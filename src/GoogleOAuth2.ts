@@ -19,8 +19,12 @@ export default class GoogleOAuth2 {
   protected appID: string;
   protected appSecret: string;
   protected callback: string;
-  protected state: any;
-  protected scopes: string[];
+  protected state: any = undefined;
+  protected scopes: string[] = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid',
+  ];
 
   constructor(
     appID: string,
