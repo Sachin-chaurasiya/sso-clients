@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
+// Types
 interface Tokens {
   access_token: string;
   token_type: string;
@@ -15,11 +16,13 @@ interface User {
   name?: string;
 }
 
+// Logic
+
 export default class GoogleOAuth2 {
   protected appID: string;
   protected appSecret: string;
   protected callback: string;
-  protected state: any = {};
+  protected state: any;
   protected scopes: string[] = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -30,15 +33,17 @@ export default class GoogleOAuth2 {
     appID: string,
     appSecret: string,
     callback: string,
-    state: any,
-    scopes: string[] = []
+    scopes: string[],
+    state?: any
   ) {
     this.appID = appID;
     this.appSecret = appSecret;
     this.callback = callback;
-    this.state = state ?? {};
     this.scopes = scopes.length ? scopes : this.scopes;
+    this.state = state;
   }
+
+  // public methods
 
   public getName(): string {
     return 'google';
@@ -117,7 +122,7 @@ export default class GoogleOAuth2 {
     return user.name || '';
   }
 
-  protected async getUser(accessToken: string): Promise<User> {
+  public async getUser(accessToken: string): Promise<User> {
     const response: AxiosResponse = await this.request(
       'GET',
       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${encodeURIComponent(
@@ -126,6 +131,8 @@ export default class GoogleOAuth2 {
     );
     return response.data as User;
   }
+
+  // Protected methods
 
   protected async request(
     method: string,
