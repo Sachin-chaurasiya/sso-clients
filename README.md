@@ -30,6 +30,11 @@
 </p>
 </div>
 
+## Clients
+
+- [Google](#import-the-google-client)
+- [GitHub](#import-the-github-client)
+
 ## Installation
 
 ```bash
@@ -75,5 +80,43 @@ const googleOAuth = new GoogleOAuth2(
 - `getUserName(accessToken: string): Promise<string>`: Retrieves the user's name using the access token. Returns a Promise that resolves to the user's name.
 
 - `getUser(accessToken: string): Promise<User>`: Retrieves the user's information (sub, email, email_verified, name) using the access token. Returns a Promise that resolves to the user object.
+
+### Import the GitHub Client
+```js
+import { GithubOAuth2 } from "sso-clients";
+```
+
+### Initialize the Client
+
+```js
+const githubOAuth = new GithubOAuth2(
+  "YOUR_GITHUB_CLIENT_ID",
+  "YOUR_GITHUB_CLIENT_SECRET",
+  "YOUR_CALLBACK_URL",
+  ['user:email']
+);
+
+```
+
+### Available methods
+
+- `getName(): string`: Returns the name of the provider ('github').
+
+- `getLoginURL(): string`: Returns the URL for GitHub login.
+
+- `getTokens(code: string): Promise<Tokens>`: Exchanges the authorization code for the access token. Returns a Promise that resolves to the tokens (access token, token type, expires in, and optional refresh token).
+
+- `refreshTokens(refreshToken: string): Promise<Tokens>`: Refreshes the access token using the provided refresh token. Returns a Promise that resolves to the updated tokens.
+
+- `getUserID(accessToken: string): Promise<string>`: Fetches the user ID using the provided access token.
+
+- `getUserEmail(accessToken: string): Promise<string>`: Retrieves the user's email using the access token. Returns a Promise that resolves to the user's email.
+
+- `isEmailVerified(accessToken: string): Promise<boolean>`: Checks if the user's email is verified using the access token. Returns a Promise that resolves to a boolean indicating email verification status.
+
+- `getUserName(accessToken: string): Promise<string>`: Retrieves the user's name using the access token. Returns a Promise that resolves to the user's name.
+
+- `getUser(accessToken: string): Promise<User>`: Retrieves the user's information (sub, email, email_verified, name) using the access token. Returns a Promise that resolves to the user object.
+
 
 
