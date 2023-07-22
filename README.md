@@ -1,6 +1,34 @@
-# sso-clients
+# SSO Clients
 
-A TypeScript-supported package for SSO login.
+<div align="center">
+<h4 align="center">A TypeScript-supported package for SSO login.
+</h4>
+<p align="center">
+    <a href="https://github.com/Sachin-chaurasiya/sso-clients/issues/new/choose">Report Bug</a>
+    ·
+    <a href="https://github.com/Sachin-chaurasiya/sso-clients/issues/new/choose">Request Feature</a>
+</p>
+<p align="center">
+<a href="https://www.npmjs.com/package/sso-clients" target="blank">
+<img alt="Package-Version" src="https://img.shields.io/github/package-json/v/Sachin-chaurasiya/sso-clients?style=flat-square">
+</a>
+  <a href="https://github.com/Sachin-chaurasiya/sso-clients/blob/main/LICENSE" target="blank">
+<img src="https://img.shields.io/github/license/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients licence" />
+</a>
+<a href="https://github.com/Sachin-chaurasiya/sso-clients/fork" target="blank">
+<img src="https://img.shields.io/github/forks/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients forks"/>
+</a>
+<a href="https://github.com/Sachin-chaurasiya/sso-clients/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients stars"/>
+</a>
+<a href="https://github.com/Sachin-chaurasiya/sso-clients/issues" target="blank">
+<img src="https://img.shields.io/github/issues/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients issues"/>
+</a>
+<a href="https://github.com/Sachin-chaurasiya/sso-clients/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients pull-requests"/>
+</a>
+</p>
+</div>
 
 ## Installation
 
