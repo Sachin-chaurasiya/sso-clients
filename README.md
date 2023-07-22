@@ -1,13 +1,13 @@
-# @sachin-chaurasiya/sso-clients
+# sso-clients
 
 A TypeScript-supported package for SSO login.
 
 ## Installation
 
 ```bash
-npm install @sachin-chaurasiya/sso-clients
+npm install sso-clients
 
 OR
 
-yarn add @sachin-chaurasiya/sso-clients
+yarn add sso-clients
 ```
