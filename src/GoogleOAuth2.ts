@@ -19,7 +19,7 @@ export default class GoogleOAuth2 {
   protected appID: string;
   protected appSecret: string;
   protected callback: string;
-  protected state: any = undefined;
+  protected state: any = {};
   protected scopes: string[] = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -36,8 +36,8 @@ export default class GoogleOAuth2 {
     this.appID = appID;
     this.appSecret = appSecret;
     this.callback = callback;
-    this.state = state;
-    this.scopes = scopes;
+    this.state = state ?? {};
+    this.scopes = scopes.length ? scopes : this.scopes;
   }
 
   public getName(): string {
