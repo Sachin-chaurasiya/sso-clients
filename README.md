@@ -34,6 +34,7 @@
 
 - [Google](#import-the-google-client)
 - [GitHub](#import-the-github-client)
+- [Auth0](#import-the-auth0-client)
 
 ## Installation
 
@@ -63,24 +64,6 @@ const googleOAuth = new GoogleOAuth2(
 
 ```
 
-### Available methods
-
-- `getName(): string`: Returns the name of the provider ('google').
-
-- `getLoginURL(): string`: Returns the URL for Google login.
-
-- `getTokens(code: string): Promise<Tokens>`: Exchanges the authorization code for the access token. Returns a Promise that resolves to the tokens (access token, token type, expires in, and optional refresh token).
-
-- `refreshTokens(refreshToken: string): Promise<Tokens>`: Refreshes the access token using the provided refresh token. Returns a Promise that resolves to the updated tokens.
-
-- `getUserEmail(accessToken: string): Promise<string>`: Retrieves the user's email using the access token. Returns a Promise that resolves to the user's email.
-
-- `isEmailVerified(accessToken: string): Promise<boolean>`: Checks if the user's email is verified using the access token. Returns a Promise that resolves to a boolean indicating email verification status.
-
-- `getUserName(accessToken: string): Promise<string>`: Retrieves the user's name using the access token. Returns a Promise that resolves to the user's name.
-
-- `getUser(accessToken: string): Promise<User>`: Retrieves the user's information (sub, email, email_verified, name) using the access token. Returns a Promise that resolves to the user object.
-
 ### Import the GitHub Client
 ```js
 import { GithubOAuth2 } from "sso-clients";
@@ -98,11 +81,29 @@ const githubOAuth = new GithubOAuth2(
 
 ```
 
-### Available methods
+### Import the Auth0 Client
 
-- `getName(): string`: Returns the name of the provider ('github').
+```js
+import { Auth0OAuth2 } from "sso-clients";
+```
+### Initialize the Client
 
-- `getLoginURL(): string`: Returns the URL for GitHub login.
+```js
+const auth0OAuth = new Auth0OAuth2(
+  "YOUR_AUTH0_CLIENT_ID",
+  "YOUR_AUTH0_CLIENT_SECRET",
+  "YOUR_CALLBACK_URL",
+  "YOUR_AUTH0_DOMAIN",
+  ["openid", "profile", "email", "offline_access"],
+);
+
+```
+
+## Available methods for a client
+
+- `getName(): string`: Returns the name of the provider.
+
+- `getLoginURL(): string`: Returns the URL for provider login.
 
 - `getTokens(code: string): Promise<Tokens>`: Exchanges the authorization code for the access token. Returns a Promise that resolves to the tokens (access token, token type, expires in, and optional refresh token).
 
@@ -117,6 +118,3 @@ const githubOAuth = new GithubOAuth2(
 - `getUserName(accessToken: string): Promise<string>`: Retrieves the user's name using the access token. Returns a Promise that resolves to the user's name.
 
 - `getUser(accessToken: string): Promise<User>`: Retrieves the user's information (sub, email, email_verified, name) using the access token. Returns a Promise that resolves to the user object.
-
-
-
