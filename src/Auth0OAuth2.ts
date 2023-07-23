@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // Types
 interface Tokens {
@@ -174,7 +174,9 @@ export default class Auth0OAuth2 {
 
       return response;
     } catch (error) {
-      throw new Error(`Failed to make a request: ${(error as Error).message}`);
+      throw new Error(
+        `Failed to make a request: ${(error as AxiosError).message}`
+      );
     }
   }
 
