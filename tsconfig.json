@@ -6,7 +6,8 @@
     "outDir": "./lib",
     "strict": true,
     "lib": ["ES2015"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDeclarationOnly": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]

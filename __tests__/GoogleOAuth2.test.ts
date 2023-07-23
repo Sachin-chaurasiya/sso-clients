@@ -1,4 +1,4 @@
-import GoogleOAuth2 from '../lib/GoogleOAuth2';
+import { GoogleOAuth2 } from '../lib';
 
 describe('GoogleOAuth2', () => {
   it('should create an instance', () => {

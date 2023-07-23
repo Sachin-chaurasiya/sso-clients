@@ -1,4 +1,4 @@
-import GithubOAuth2 from '../lib/GithubOAuth2';
+import { GithubOAuth2 } from '../lib';
 
 describe('GithubOAuth2', () => {
   it('should create an instance', () => {

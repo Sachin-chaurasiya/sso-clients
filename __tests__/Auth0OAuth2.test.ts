@@ -1,4 +1,4 @@
-import Auth0OAuth2 from '../lib/Auth0OAuth2';
+import { Auth0OAuth2 } from '../lib';
 
 describe('Auth0OAuth2', () => {
   it('should create an instance', () => {
