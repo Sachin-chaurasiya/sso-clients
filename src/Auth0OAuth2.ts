@@ -10,72 +10,82 @@ interface Tokens {
 }
 
 interface User {
-  id?: string;
+  sub?: string;
   email?: string;
-  verified?: boolean;
+  email_verified?: boolean;
   name?: string;
 }
 
 // Logic
 
-export default class GithubOAuth2 {
+export default class Auth0OAuth2 {
   protected appID: string;
+  protected domain: string;
   protected appSecret: string;
   protected callback: string;
   protected state: any;
-  protected scopes: string[] = ['user:email'];
+  protected scopes: string[] = ['openid', 'profile', 'email', 'offline_access'];
   protected user: User | undefined;
+  protected tokens: Tokens | undefined;
 
   constructor(
     appID: string,
     appSecret: string,
     callback: string,
+    domain: string,
     scopes: string[],
     state?: any
   ) {
     this.appID = appID;
     this.appSecret = appSecret;
     this.callback = callback;
+    this.domain = domain;
     this.scopes = scopes.length ? scopes : this.scopes;
     this.state = state;
     this.user = undefined;
+    this.tokens = undefined;
   }
 
   // public methods
 
   public getName(): string {
-    return 'github';
+    return 'auth0';
   }
 
   public getLoginURL(): string {
-    return `https://github.com/login/oauth/authorize?${new URLSearchParams({
+    return `https://${this.domain}/authorize?${new URLSearchParams({
       client_id: this.appID,
       redirect_uri: this.callback,
-      scope: this.getScopes().join(' '),
       state: JSON.stringify(this.state),
+      scope: this.getScopes().join(' '),
+      response_type: 'code',
     })}`;
   }
 
   public async getTokens(code: string): Promise<Tokens> {
-    const payload = new URLSearchParams({
-      code,
-      client_id: this.appID,
-      client_secret: this.appSecret,
-      redirect_uri: this.callback,
-    });
+    if (!this.tokens) {
+      const payload = new URLSearchParams({
+        code,
+        client_id: this.appID,
+        client_secret: this.appSecret,
+        redirect_uri: this.callback,
+        scope: this.getScopes().join(' '),
+        grant_type: 'authorization_code',
+      });
 
-    const response: AxiosResponse = await this.request(
-      'POST',
-      'https://github.com/login/oauth/access_token',
-      {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      payload.toString()
-    );
+      const response: AxiosResponse = await this.request(
+        'POST',
+        `https://${this.domain}/oauth/token`,
+        {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        payload.toString()
+      );
 
-    const tokens = response.data as Tokens;
+      this.tokens = response.data as Tokens;
+    }
 
-    return tokens;
+    return this.tokens;
   }
 
   public async refreshTokens(refreshToken: string): Promise<Tokens> {
@@ -88,26 +98,26 @@ export default class GithubOAuth2 {
 
     const response: AxiosResponse = await this.request(
       'POST',
-      'https://github.com/login/oauth/access_token',
+      `https://${this.domain}/oauth/token`,
       {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       payload.toString()
     );
 
-    const tokens = response.data as Tokens;
+    this.tokens = response.data as Tokens;
 
-    if (!tokens.refresh_token) {
-      tokens.refresh_token = refreshToken;
+    if (!this.tokens.refresh_token) {
+      this.tokens.refresh_token = refreshToken;
     }
 
-    return tokens;
+    return this.tokens;
   }
 
   public async getUserID(accessToken: string): Promise<string> {
     const user = await this.getUser(accessToken);
 
-    return user.id || '';
+    return user.sub || '';
   }
 
   public async getUserEmail(accessToken: string): Promise<string> {
@@ -119,7 +129,7 @@ export default class GithubOAuth2 {
   public async isEmailVerified(accessToken: string): Promise<boolean> {
     const user = await this.getUser(accessToken);
 
-    return !!user.verified;
+    return !!user.email_verified;
   }
 
   public async getUserName(accessToken: string): Promise<string> {
@@ -130,35 +140,17 @@ export default class GithubOAuth2 {
 
   public async getUser(accessToken: string): Promise<User> {
     if (!this.user || Object.keys(this.user).length === 0) {
+      const headers = {
+        Authorization: `Bearer ${encodeURIComponent(accessToken)}`,
+      };
+
       const response: AxiosResponse = await this.request(
         'GET',
-        'https://api.github.com/user',
-        {
-          Authorization: `token ${encodeURIComponent(accessToken)}`,
-        }
+        `https://${this.domain}/userinfo`,
+        headers
       );
 
-      const userData = response.data as User;
-
-      const emailsResponse: AxiosResponse = await this.request(
-        'GET',
-        'https://api.github.com/user/emails',
-        {
-          Authorization: `token ${encodeURIComponent(accessToken)}`,
-        }
-      );
-
-      const emailsData: User[] = emailsResponse.data;
-
-      for (const email of emailsData) {
-        if (email.verified === true) {
-          userData.email = email.email;
-          userData.verified = email.verified;
-          break;
-        }
-      }
-
-      this.user = userData;
+      this.user = response.data as User;
     }
 
     return this.user;
