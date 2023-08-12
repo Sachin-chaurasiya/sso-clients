@@ -9,6 +9,9 @@
     <a href="https://github.com/Sachin-chaurasiya/sso-clients/issues/new/choose">Request Feature</a>
 </p>
 <p align="center">
+<a href="http://www.npmtrends.com/sso-clients" target="blank">
+<img src="https://img.shields.io/npm/dm/sso-clients.svg?style=flat-square" alt="sso-clients downloads"/>
+</a>    
 <a href="https://www.npmjs.com/package/sso-clients" target="blank">
 <img alt="Package-Version" src="https://img.shields.io/github/package-json/v/Sachin-chaurasiya/sso-clients?style=flat-square">
 </a>
