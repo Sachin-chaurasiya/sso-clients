@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npx tsc",
     "prepare": "yarn run build",
-    "test": "jest --passWithNoTests --maxWorkers=3 --silent"
+    "test": "jest --passWithNoTests --maxWorkers=3 --silent --coverage"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Unit Tests + Coverage
 
 on:
   pull_request:
@@ -26,3 +26,11 @@ jobs:
 
       - name: Run Jest tests
         run: yarn run test
+
+      - name: Jest coverage comment
+        uses: MishaKav/jest-coverage-comment@v1.0.22
+        with:
+          coverage-summary-path: coverage/coverage-final.json
+          title: Jest Test Coverage
+          summary-title: Tests summary
+          badge-title: Coverage
