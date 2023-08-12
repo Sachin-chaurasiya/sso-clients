@@ -30,6 +30,9 @@
 <a href="https://github.com/Sachin-chaurasiya/sso-clients/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/Sachin-chaurasiya/sso-clients?style=flat-square" alt="sso-clients pull-requests"/>
 </a>
+<a href="https://github.com/Sachin-chaurasiya/sso-clients/actions/workflows/unit-test.yml" target="blank"> 
+<img src="https://github.com/Sachin-chaurasiya/sso-clients/actions/workflows/unit-test.yml/badge.svg?branch=main" />   
+</a>    
 </p>
 </div>
 
