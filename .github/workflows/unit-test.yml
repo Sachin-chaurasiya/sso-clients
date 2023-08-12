@@ -30,7 +30,7 @@ jobs:
       - name: Jest coverage comment
         uses: MishaKav/jest-coverage-comment@v1.0.22
         with:
-          coverage-summary-path: coverage/coverage-final.json
+          coverage-summary-path: coverage/coverage-summary.json
           title: Jest Test Coverage
           summary-title: Tests summary
           badge-title: Coverage
