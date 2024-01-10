@@ -1,6 +1,6 @@
 {
   "name": "sso-clients",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A TypeScript supported package for SSO login.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
