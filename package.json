@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/Sachin-chaurasiya/sso-clients#readme",
   "dependencies": {
-    "axios": "^1.4.0"
+    "axios": "^1.6.5"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
